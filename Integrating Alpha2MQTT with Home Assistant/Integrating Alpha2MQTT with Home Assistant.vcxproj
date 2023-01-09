@@ -22,7 +22,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{3198c95a-3aa9-4009-ade9-12b6adc7ca2e}</ProjectGuid>
+    <ProjectGuid>{3198c95a-3aa9-4009-ade9-12b6adc7ca2d}</ProjectGuid>
     <RootNamespace>IntegratingAlpha2MQTTwithHomeAssistant</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

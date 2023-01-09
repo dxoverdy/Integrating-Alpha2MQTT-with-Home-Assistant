@@ -1,10 +1,10 @@
-# Integrating Sofar2mqtt with Home Assistant
-## Full instructions to get going with a Sofar2mqtt, Raspberry Pi and Home Assistant.
+# Integrating Alpha2MQTT with Home Assistant
+## Full instructions to get going with an Alpha2MQTT, Raspberry Pi and Home Assistant.
 This is an exhaustive guide, fully documented, screenshotted step by step.  This will take around 4 to 5 hours to complete, depending on technical experience.
 
 ## Prerequisites
-### Sofar2mqtt
-Build or obtain a [Sofar2mqtt](https://github.com/cmcgerty/Sofar2mqtt)
+### Alpha2MQTT
+Build or obtain an [Alpha2MQTT](https://github.com/dxoverdy/Alpha2MQTT)
 
 
 I recommend you utilise the 3.3v MAX3485 (Red module) if building this yourself.  I also recommend the screen.  The screen isn't required but it at least provides some initial feedback about whether your build is working.  In short, spend the money and spend less time debugging!
@@ -23,11 +23,11 @@ The 400 is identical to the plain Raspberry Pi 4 Model B, however you don't need
 Save it to your desktop, open it in Notepad and have it ready throughout this guide to save account details and links and tokens as you go along.
 
 ### Downloading files from this repository
-All files are available from the [Integrating Sofar2mqtt with Home Assistant](https://github.com/dxoverdy/Integrating-Sofar2mqtt-with-Home-Assistant/tree/master/Integrating%20Sofar2mqtt%20with%20Home%20Assistant) folder in this repository.
+All files are available from the [Alpha2MQTT](https://github.com/dxoverdy/Alpha2MQTT) repository.
 
 For the avoidance of doubt, I'd recommend two ways to download the contents to avoid introducing error by copying text or contents from your web browser.
 
--The first way is to right click on a file, for example Sofar2mqtt.json and left click on the equivalent of 'Save Link As...' in your browser.  Save it to a folder of your choosing.
+-The first way is to right click on a file, for example configuration.yaml.txt and left click on the equivalent of 'Save Link As...' in your browser.  Save it to a folder of your choosing.
 ![Right Click](Images/Download.png)
 -The other way is to download the whole repository as a zip by left clicking on the green 'Code'  button on the front page of the repository, and then left click on 'Download zip'
 ![Download Repository](Images/Download2.png)
@@ -107,13 +107,13 @@ Highlighted in this pic are two elements, first is the Local IP address dedicate
 As such, open Chrome or any browser of your choice and navigate to http://homeassistant.local:8123/ or in my case, I can navigate to http://192.168.1.112:8123/ as that is the Local IP address given to my Raspberry Pi by my router.  Your Local IP address will be different to mine.
 
 
-Your IP (in my case 192.168.1.112) should be added to your 'setup.txt' file as Sofar2mqtt will need this to post inverter messages later.
+Your IP (in my case 192.168.1.112) should be added to your 'setup.txt' file as Alpha2MQTT will need this to post inverter messages later.
 
 ## Configuring your Router
 ### Configuring your Router
 We need to ensure that
 
-- Your Raspberry Pi always gets given the same Local IP address, in my case 192.168.1.112, every time it is booted up.  Like your Internet connection, it is no good programming Sofar2mqtt with the current Local IP only for it to change when your router dishes out a different Local IP to your Pi!  Your router will work like your Internet IP and re-use IP addresses from a pool for the same reasons of IP address shortage.
+- Your Raspberry Pi always gets given the same Local IP address, in my case 192.168.1.112, every time it is booted up.  Like your Internet connection, it is no good programming Alpha2MQTT with the current Local IP only for it to change when your router dishes out a different Local IP to your Pi!  Your router will work like your Internet IP and re-use IP addresses from a pool for the same reasons of IP address shortage.
 
 - Open up port 8123 (the bit after the colon in the address above) to the outside world so you can access your Home Assistant from anywhere.
 
@@ -187,7 +187,7 @@ And I'll click Create Account
 
 You should use your full name and a username and password which are secure enough not to be guessed (as your Raspberry Pi will be open to the outside world) and you should add them to your 'setup.txt' so that they aren't forgotten.
 
-The next screen will prompt you for a name, I'd leave it as default for Home because Home Assistant doesn't just cover off linking to Sofar2mqtt, it can also drive any Hue bulbs you may have, Google Nest products and a whole reap of other home automation kit.
+The next screen will prompt you for a name, I'd leave it as default for Home because Home Assistant doesn't just cover off linking to Alpha2MQTT, it can also drive any Hue bulbs you may have, Google Nest products and a whole reap of other home automation kit.
 
 ![Location](Images/Pic3.PNG)
 
@@ -454,7 +454,7 @@ In Logins, paste the following, including the hyphen:
   password: Switch1
 ```
 
-battery and Switch1 should be added to your 'setup.txt' file as Sofar2mqtt will need this to post inverter messages.
+battery and Switch1 should be added to your 'setup.txt' file as Alpha2MQTT will need this to post inverter messages.
 
 You can of course choose a different username or password, but this is quite safe for the job.
 ![Mosquitto Setup](Images/MosquittoSetup.PNG)
@@ -591,9 +591,9 @@ In my example, this is http://mydan-dan-ha.duckdns.org:8123
 ![HAURL](Images/HAURL.PNG)
 
 
-## Sofar2mqtt
+## Alpha2MQTT
 ### Gather your details
-Now, we need to take the details of our Mosquitto broker now running on our Home Assistant box and plumb them into Sofar2mqtt.
+Now, we need to take the details of our Mosquitto broker now running on our Home Assistant box and plumb them into Alpha2MQTT.
 
 From your 'setup.txt' file, you should have the Local IP Address of your Raspberry Pi.  In my case this was 192.168.1.112
 
@@ -602,33 +602,31 @@ You should also have the username and password we configured in Mosquitto.  In m
 - username: battery
   password: Switch1
 ```
-I am assuming you have followed the build and configuration instructions on the Sofar2mqtt site, and that you have Arduino open with Sofar2mqtt.ino ready in there.
+I am assuming you have followed the build and configuration instructions on the Alpha2MQTT site, and that you have Arduino open with Alpha2MQTT.ino ready in there.
 
-* One thing Sofar2mqtt does not mention is D1mini drivers.  Install the drivers from https://www.wemos.cc/en/latest/ch340_driver.html if you need them.
-
-### Editing Sofar2mqtt.ino
-At the top of the code there are definitions you need to configure based on what we have just done.
-- If you are using an ME3000 then ensure the ME3000 line begins #define and that the HYBRID line begins //.
-- If you are using a HYBRID then ensure the ME3000 line begins with // and that the HYBRID line begins #define.
+### Editing Definitions.h
+Open 
+At the top of the code just after "Update these to match your inverter" there are definitions you need to configure based on what we have just done.
+- Comment out all the inverters to choose from, aside from the one you are using
 - Type in your Wi-Fi name between the quotes for WIFI_SSID
 - Type in your Wi-Fi password between the quotes for WIFI_PASSWORD
-- Type in your Local IP Address of your Raspberry Pi between the quotes for WIFI_PASSWORD
+- Type in your Local IP Address of your Raspberry Pi between the quotes for MQTT_SERVER
 - Type in your Username you configured in Mosquitto earlier for MQTT_USERNAME, we used battery
 - Type in your Password you configured in Mosquitto earlier for MQTT_PASSWORD, we used Switch1
 
-![Sofar Config](Images/SofarConfig.PNG)
+![Alpha Config](Images/AlphaMqttConfig.PNG)
 
-Save this as Sofar2mqtt-customised.ino, that way you have this file to fall back to pre-configured with your details.
+Save your Definitions.h
 - Remember, if your Wi-Fi changes, you will need to update the WIFI_SSID and WIFI_PASSWORD to suit the new router.
 - Remember, if your Raspberry Pi changes, you will need to update MQTT_SERVER, MQTT_USERNAME and MQTT_PASSWORD to suit your new config.
 
 Flash this using the Sketch -> Upload menu.
 
 
-## Node-RED - Sofar2mqtt.json
-This flow imports the data from Sofar2mqtt and presents the results to Home Assistant as sensors.
+## Node-RED - Alpha Ten Second State.json
+This flow imports the data from the ten second state from Alpha2MQTT and presents the results to Home Assistant as sensors.
 
-Download Sofar2mqtt.json from this GitHub repository
+Download Alpha Ten Second State.json from the GitHub repository
 
 Click Node-RED on the left hand side
 
@@ -640,68 +638,133 @@ Skip through the intro
 At the top right, click the three-line menu burger and click Import
 ![Node Red Import](Images/NodeRedIMPORT.PNG)
 
-Click 'select a file to import' and browse to the Sofar2MQTT.json downloaded a few steps ago.
+Click 'select a file to import' and browse to the Alpha Ten Second State.json downloaded a few steps ago.
 
 Click 'new flow' for Import to
 
 Click Import
-![Sofar Flow Settings](Images/NodeRedSofarImportOptions.PNG)
+![Ten Second Flow Settings](Images/ImportTenSecondSettings.PNG)
+
+
+It may prompt "Some of the nodes you are importing already exist in your workspace", just choose 'Import Copy'
+
 
 The flow will appear in the right hand side, and also in a tab at the top.  Click the tab:
-![Sofar Flow](Images/SofarFlow.PNG)
+![Ten Second Flow](Images/TenSecondFlow.PNG.PNG)
 
 We just need to configure the Mosquitto details and we are done.
 
-Double click the purple Sofar2MQTT node on the left and the following properties screen will open:
-![Sofar Flow Config](Images/SofarFlowConfig1.PNG)
+Double click the purple Ten Second Status node on the left and the following properties screen will open:
+![Ten Second Flow Config](Images/TenSecondFlowConfig1.PNG)
 
-Click the Pencil alongside 'Home Assistant Mosquitto'
+Click the Pencil alongside 'Mosquitto Broker'
+
+On the Connection tab, type in the Local IP of your Raspberry Pi, in my case, this was 192.168.1.112
+![Broker Node Config](Images/BrokerNodeConfig.PNG)
 
 Click on the 'Security' tab and type in our Mosquitto username and password configured earlier.
 
 In my case, these were battery and Switch1
-![Broker Node Config](Images/BrokerNodeConfig.PNG)
+![Broker Node Config](Images/BrokerNodeConfig2.PNG)
 
 Click Update
 
 Click Done
 
-Click Deploy at the top right.  Once deployed, you will see that the MQTT node Sofar2MQTT has connected:
+Click Deploy at the top right.  Once deployed, you will see that the MQTT node Ten Second Status has connected:
 ![Broker Connected](Images/BrokerConnected.PNG)
 
+## Node-RED - Alpha One Minute State.json
+This flow imports the data from the one minute state from Alpha2MQTT and presents the results to Home Assistant as sensors.
 
-## OPTIONAL Node-Red - Economy7Management.json
-This flow will automatically charge the battery to 100% and keep the load powered by the grid until the end of the Economy 7 time period.  This is useful if you are leveraging Econonmy 7 and also within winter months where solar generation is poor.
 
-At the top right, click the three-line menu burger and click Import
-![Node Red Import E7](Images/NodeRedIMPORT.PNG)
+Download Alpha One Minute State.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
-Click 'select a file to import' and browse to the Economy7Management.json downloaded a few steps ago.
 
-Click 'new flow' for Import to
+_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
 
-Click Import
-![Sofar Flow Settings](Images/E7ImportSettings.PNG)
+## Node-RED - Alpha Five Minute State.json
+This flow imports the data from the five minute state from Alpha2MQTT and presents the results to Home Assistant as sensors.
 
-It may prompt "Some of the nodes you are importing already exist in your workspace", just choose 'Import Copy'
 
-The flow will appear in the right hand side, and also in a tab at the top.  Click the tab:
-![Node Red Import E7 Settings](Images/E7Flow.PNG)
+Download Alpha Five Minute State.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
-We just need to verify your Economy 7 or Octopus Go times.  Double click the orange Format node and the following properties screen will open:
-![Node Red Import E7 Setup](Images/E7Setup.PNG)
 
-Scroll down to the part of the code shown in the screenshot above to configure your cheap rate tariff.  It is defaulted to 00:35 and 07:25.
+_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
 
-Click Done
+## Node-RED - Alpha One Hour State.json
+This flow imports the data from the one hour state from Alpha2MQTT and presents the results to Home Assistant as sensors.
 
-Click Deploy at the top right.  Once deployed, you will see that the MQTT node Sofar2MQTT has connected:
-![Node Red Import E7 Connected](Images/E7Connected.PNG)
 
-If you want to disable this, open Node-RED, click the 'Economy 7 Management' tab at the top
+Download Alpha One Hour State.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
-On the right hand side list, there is a white circle next to Economy 7 Management labelled Disable.  Simply click this as below:
-![Node Red Disable E7](Images/E7Disable.png)
+
+_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+
+## Node-RED - Alpha One Day State.json
+This flow imports the data from the one day state from Alpha2MQTT and presents the results to Home Assistant as sensors.
+
+
+Download Alpha One Day State.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
+
+
+_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+
+## Node-RED - Alpha Register Read Write.json
+This flow imports the data from responses to reading and writing data registers and presents the results to Home Assistant as sensors.
+
+
+Download Alpha Register Read Write.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
+
+
+_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+
+## Node-RED - Alpha Dispatch Responses.json
+This flow imports the data from responses to dispatch modes such as forcibly charging and discharging to the grid and presents the results to Home Assistant as sensors.
+
+
+Download Alpha Dispatch Responses.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
+
+
+_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+
+## Node-RED Alpha Charge TOU.json
+This flow will automatically charge the battery at a certain time to a target percentage of your choice and keep the load powered by the grid until the end of the time period you choose.  This is useful if you are leveraging Econonmy 7 and also within winter months where solar generation is poor.
+
+
+Download Alpha Charge TOU.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
+
+
+_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+
+
+You need to configure your kick off time, charge rate in Watts, duration in seconds and target SOC in %.
+
+
+Double click the 'Format' node to bring up some JavaScript code.  You will see you can specify the kick off time.  We set a five minute period to 'catch' the kick off time as we are dependent on a Ten Second State from Alpha2MQTT.
+
+
+In the default code it will attempt to start charging between 00:35 and 00:40 each night.  Customise this as you see fit.  You are only dealing with the start time here!
+![Node Red TOU Setup](Images/TOUFormatSettings.PNG)
+
+Click Done.
+
+
+Double click the yellow 'Set payload charge rate and duration' node to bring up its settings:
+![Node Red Import TOU 2](Images/TOU2.PNG)
+
+
+Click the three dot (...) button alongside 'To the value' and set the charge rate in Watts, target SOC in % and how long to keep in this mode in seconds.  Seven hours for example is 25200.
+![Node Red Import TOU 2](Images/TOU3.PNG)
+
+Click Done.
+Click Done again.
+
+
+If you want to disable this, open Node-RED, double click the 'Alpha Charge TOU' tab at the top
+
+In the options that pop up, click the 'Enabled' button at the bottom and click Done.
+![Node Red Disable TOU](Images/TOUDisable.PNG)
 
 
 ## MQTT Integration
@@ -735,7 +798,7 @@ Click on configuration.yaml in the config/ folder:
 
 In the right hand side you will see it is a pretty simple config at this stage.  To save it locally, copy and paste the contents to a new Notepad and save the file to your desktop as configuration-backup-2023-01-06.yaml.  Change 2023-01-06 to reflect the yyyy-mm-dd you are doing this.  This is just a safeguard.
 
-Download the configuration.yaml from this GitHub Repository
+Download the configuration.yaml.txt from the Alpha2MQTT Repository
 
 Open the file in Notepad
 
@@ -759,36 +822,42 @@ Once back up and running, we only have dashboards to configure!
 
 
 ## Home Assistant - Dashboards:
-There are two dashboards, one which shows all information in real-time.  The second is to do with inverter control.
+There are four dashboards:
 
-### Real-Time Info Dashboard:
+- Alpha - Displays information from the inverter in real time and over time similar to the AlphaCloud
+- Alpha Control - Allows you to forcibly charge and discharge your battery from/to the grid
+- Alpha Read Register - Allows you to read any register of your choosing using Alpha2MQTT's Handled or Raw route
+- Alpha Write Register - Allows you to write any data register of your choosing using Alpha2MQTT's Write Raw Data Register route
+
+
+
+### Alpha:
 Click on Settings and then click on Dashboards
 
 Click + ADD DASHBOARD at the bottom right.
 ![Add Dashboard](Images/AddDashboard.PNG)
 
-Configure a dashboard called SOFAR
+Configure a dashboard called Alpha
 
-Choose an icon, I used mdi:solar-panel
+Choose an icon, I used mdi:battery
 
 And ensure Show in sidebar is ticked
-![Create Dashboard Sofar](Images/CreateDashboardSOFAR.PNG)
+![Create Dashboard Alpha](Images/CreateDashboardALPHA.PNG)
 
 Click Create
 
-Click SOFAR which will now be at the top left hand side.  Click the three dots on the far right side and click Edit Dashboard
-![Edit Dashboard Sofar](Images/EditDashboard.PNG)
+Click Alpha which will now be at the top left hand side.  Click the three dots on the far right side and click Edit Dashboard
+![Edit Dashboard Alpha](Images/EditDashboard.PNG)
 
 Tick 'Start with an empty dashboard' and then 'TAKE CONTROL'
-![Take Control Sofar](Images/TakeControl.PNG)
+![Take Control Alpha](Images/TakeControl.PNG)
 
 Click the three dots at the top right and click 'Raw configuration editor'
-![Raw Config Sofar](Images/RawConfig.PNG)
+![Raw Config Alpha](Images/RawConfig.PNG)
 
 Select all the text currently in there and get rid.
 
-Open SofarDashboard.txt from this repository in Notepad and copy and paste the contents into the window like so:
-![Raw Config Sofar Dashboard](Images/SofarDashboard.PNG)
+Open AlphaDashboard.txt from the Alpha2MQTT repository in Notepad and copy and paste the contents into the window.
 
 Click SAVE at the top right
 
@@ -797,10 +866,10 @@ Press the X at the top left
 Then click DONE at the top right
 
 Your dashboard shouldn't look too different to the following:
-![SOFAR Page 1](Images/SOFAR1Example.PNG)
+![Alpha Page 1](Images/ALPHA1Example.PNG)
 
 Clicking on TODAY'S POWER DIAGRAM will give you today's picture in a graph:
-![SOFAR Page 2](Images/Today.PNG)
+![Alpha Page 2](Images/ALPHA2Example.PNG)
 
 
 ### If you get a problem on any of the tabs, for example the TODAY'S POWER DIAGRAM you may see 'Custom element doesn't exist: apexcharts-card' then I found this just to be a bug in HACS.
@@ -825,42 +894,52 @@ When done, click RELOAD
 Repeat for all other unloaded elements.
 
 
-### Inverter Control Dashboard
-Click on Settings and then click on Dashboards
+### Alpha Control
+Download AlphaControlDashboard.txt from the Alpha2MQTT repository.
 
-Click + ADD DASHBOARD at the bottom right.
-![Add Dashboard](Images/AddDashboard.PNG)
 
-Configure a dashboard called Inverter Control
+Follow the steps as per Alpha, however, for info, I used the following settings:
 
-Choose an icon, I used mdi:remote
 
-And ensure Show in sidebar is ticked
+- Name: Alpha Control
+- Icon: mdi-remote
+- Show in Sidebar: ticked
 
-Click Create
-
-Click Inverter Control which will now be at the top left hand side.  Click the three dots on the far right side and click Edit Dashboard
-![Edit Dashboard 2](Images/EditDashboard2.PNG)
-
-Tick 'Start with an empty dashboard' and then 'TAKE CONTROL'
-![Take Control 2](Images/TakeControl.PNG)
-
-Click the three dots at the top right and click 'Raw configuration editor' as before.
-
-Select all the text currently in there and get rid.
-
-Open InverterControlDashboard.txt from this repository in Notepad and copy and paste the contents into the window like so:
-![Inverter Control Pasted](Images/InverterControlPasted.PNG)
-
-Click SAVE at the top right
-
-Press the X at the top left
-
-Then click DONE at the top right
 
 Your dashboard shouldn't look too far away from the following:
 ![Inverter Control Dashboard](Images/InverterControl.PNG)
 
+
+### Alpha Read Register
+Download AlphaReadRegisterDashboard.txt from the Alpha2MQTT repository.
+
+
+Follow the steps as per Alpha, however, for info, I used the following settings:
+
+
+- Name: Alpha Read Register
+- Icon: mdi-database-export
+- Show in Sidebar: ticked
+
+
+Your dashboard shouldn't look too far away from the following:
+![Inverter Read Register Dashboard](Images/ReadRegister.PNG)
+
+
+### Alpha Write Register
+Download AlphaWriteRegisterDashboard.txt from the Alpha2MQTT repository.
+
+
+Follow the steps as per Alpha, however, for info, I used the following settings:
+
+
+- Name: Alpha Write Register
+- Icon: mdi-database-import
+- Show in Sidebar: ticked
+
+
+Your dashboard shouldn't look too far away from the following:
+![Inverter Write Register Dashboard](Images/AlphaWriteRegister.PNG)
 
 
 ## Home Assistant via your Smart Phone or Tablet, Home or Away
@@ -901,7 +980,7 @@ Once you are configured using a cable you can switch to Wi-Fi but bear in mind t
 - You will get a new Local IP assigned to your Raspberry Pi
 - You will need to update your documentation and links to reflect this new Local IP
 - You will need to re-configure your router to ensure the Local IP is reserved and the port 8123 instead forwarded to this new IP
-- You will need to re-flash an updated Sofar2mqtt to your device with the new MQTT IP
+- You will need to re-flash an updated Alpha2MQTT to your device with the new MQTT IP by modifying the Definitions.h file
 - All the steps above are covered earlier in the documentation
 
 ### To Swap
