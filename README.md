@@ -620,22 +620,24 @@ Save your Definitions.h
 - Remember, if your Wi-Fi changes, you will need to update the WIFI_SSID and WIFI_PASSWORD to suit the new router.
 - Remember, if your Raspberry Pi changes, you will need to update MQTT_SERVER, MQTT_USERNAME and MQTT_PASSWORD to suit your new config.
 
-Flash this using the Sketch -> Upload menu.
+Flash this using instructions from the Alpha2MQTT repository.
 
 
 ## Node-RED - Alpha Ten Second State.json
 This flow imports the data from the ten second state from Alpha2MQTT and presents the results to Home Assistant as sensors.
 
-Download Alpha Ten Second State.json from the GitHub repository
+Download Alpha Ten Second State.json from the Alpha2MQTT GitHub repository
 
 Click Node-RED on the left hand side
 
 After a pause, you will be greeted with the Intro:
+
 ![Node Red Intro](Images/NodeRedIntro.PNG)
 
 Skip through the intro
 
 At the top right, click the three-line menu burger and click Import
+
 ![Node Red Import](Images/NodeRedIMPORT.PNG)
 
 Click 'select a file to import' and browse to the Alpha Ten Second State.json downloaded a few steps ago.
@@ -643,6 +645,7 @@ Click 'select a file to import' and browse to the Alpha Ten Second State.json do
 Click 'new flow' for Import to
 
 Click Import
+
 ![Ten Second Flow Settings](Images/ImportTenSecondSettings.PNG)
 
 
@@ -650,21 +653,25 @@ It may prompt "Some of the nodes you are importing already exist in your workspa
 
 
 The flow will appear in the right hand side, and also in a tab at the top.  Click the tab:
-![Ten Second Flow](Images/TenSecondFlow.PNG.PNG)
+
+![Ten Second Flow](Images/TenSecondFlow.PNG)
 
 We just need to configure the Mosquitto details and we are done.
 
 Double click the purple Ten Second Status node on the left and the following properties screen will open:
+
 ![Ten Second Flow Config](Images/TenSecondFlowConfig1.PNG)
 
 Click the Pencil alongside 'Mosquitto Broker'
 
 On the Connection tab, type in the Local IP of your Raspberry Pi, in my case, this was 192.168.1.112
+
 ![Broker Node Config](Images/BrokerNodeConfig.PNG)
 
 Click on the 'Security' tab and type in our Mosquitto username and password configured earlier.
 
 In my case, these were battery and Switch1
+
 ![Broker Node Config](Images/BrokerNodeConfig2.PNG)
 
 Click Update
@@ -842,6 +849,7 @@ Configure a dashboard called Alpha
 Choose an icon, I used mdi:battery
 
 And ensure Show in sidebar is ticked
+
 ![Create Dashboard Alpha](Images/CreateDashboardALPHA.PNG)
 
 Click Create
