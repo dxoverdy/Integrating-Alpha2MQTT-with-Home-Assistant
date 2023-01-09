@@ -22,7 +22,7 @@ The 400 is identical to the plain Raspberry Pi 4 Model B, however you don't need
 
 Save it to your desktop, open it in Notepad and have it ready throughout this guide to save account details and links and tokens as you go along.
 
-### Downloading files from this repository
+### Downloading files for this endeavour
 All files are available from the [Alpha2MQTT](https://github.com/dxoverdy/Alpha2MQTT) repository.
 
 For the avoidance of doubt, I'd recommend two ways to download the contents to avoid introducing error by copying text or contents from your web browser.
@@ -620,7 +620,7 @@ Save your Definitions.h
 - Remember, if your Wi-Fi changes, you will need to update the WIFI_SSID and WIFI_PASSWORD to suit the new router.
 - Remember, if your Raspberry Pi changes, you will need to update MQTT_SERVER, MQTT_USERNAME and MQTT_PASSWORD to suit your new config.
 
-Flash this using instructions from the Alpha2MQTT repository.
+Flash your Alpha2MQTT using instructions from the Alpha2MQTT repository.
 
 
 ## Node-RED - Alpha Ten Second State.json
@@ -688,7 +688,7 @@ This flow imports the data from the one minute state from Alpha2MQTT and present
 Download Alpha One Minute State.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
 
-_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+_You probably won't need to configure the 'Mosquitto Broker' again however it would be good practice to check and ensure the MQTT node is connected!_
 
 ## Node-RED - Alpha Five Minute State.json
 This flow imports the data from the five minute state from Alpha2MQTT and presents the results to Home Assistant as sensors.
@@ -697,7 +697,7 @@ This flow imports the data from the five minute state from Alpha2MQTT and presen
 Download Alpha Five Minute State.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
 
-_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+_You probably won't need to configure the 'Mosquitto Broker' again however it would be good practice to check and ensure the MQTT node is connected!_
 
 ## Node-RED - Alpha One Hour State.json
 This flow imports the data from the one hour state from Alpha2MQTT and presents the results to Home Assistant as sensors.
@@ -706,7 +706,7 @@ This flow imports the data from the one hour state from Alpha2MQTT and presents 
 Download Alpha One Hour State.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
 
-_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+_You probably won't need to configure the 'Mosquitto Broker' again however it would be good practice to check and ensure the MQTT node is connected!_
 
 ## Node-RED - Alpha One Day State.json
 This flow imports the data from the one day state from Alpha2MQTT and presents the results to Home Assistant as sensors.
@@ -715,7 +715,7 @@ This flow imports the data from the one day state from Alpha2MQTT and presents t
 Download Alpha One Day State.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
 
-_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+_You probably won't need to configure the 'Mosquitto Broker' again however it would be good practice to check and ensure the MQTT node is connected!_
 
 ## Node-RED - Alpha Register Read Write.json
 This flow imports the data from responses to reading and writing data registers and presents the results to Home Assistant as sensors.
@@ -724,7 +724,7 @@ This flow imports the data from responses to reading and writing data registers 
 Download Alpha Register Read Write.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
 
-_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+_You probably won't need to configure the 'Mosquitto Broker' again however it would be good practice to check and ensure the MQTT node is connected!_
 
 ## Node-RED - Alpha Dispatch Responses.json
 This flow imports the data from responses to dispatch modes such as forcibly charging and discharging to the grid and presents the results to Home Assistant as sensors.
@@ -733,7 +733,7 @@ This flow imports the data from responses to dispatch modes such as forcibly cha
 Download Alpha Dispatch Responses.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
 
-_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+_You probably won't need to configure the 'Mosquitto Broker' again however it would be good practice to check and ensure the MQTT node is connected!_
 
 ## Node-RED Alpha Charge TOU.json
 This flow will automatically charge the battery at a certain time to a target percentage of your choice and keep the load powered by the grid until the end of the time period you choose.  This is useful if you are leveraging Econonmy 7 and also within winter months where solar generation is poor.
@@ -742,7 +742,7 @@ This flow will automatically charge the battery at a certain time to a target pe
 Download Alpha Charge TOU.json from the GitHub repository and follow the steps as per Node-RED - Alpha Ten Second State.json
 
 
-_You probably won't need to configure the 'Mosquitto Broker' but it is good practice to check and ensure the MQTT node is connected!_
+_You probably won't need to configure the 'Mosquitto Broker' again however it would be good practice to check and ensure the MQTT node is connected!_
 
 
 You need to configure your kick off time, charge rate in Watts, duration in seconds and target SOC in %.
